@@ -1,0 +1,58 @@
+{
+    "body": "{}",
+    "headers": {
+        "Host": "localhost:3000",
+        "User-Agent": "insomnia/7.1.1",
+        "Content-Type": "application/json",
+        "Accept": "*/*",
+        "Content-Length": "2"
+    },
+    "httpMethod": "POST",
+    "isBase64Encoded": false,
+    "multiValueHeaders": {
+        "Host": ["localhost:3000"],
+        "User-Agent": ["insomnia/7.1.1"],
+        "Content-Type": ["application/json"],
+        "Accept": ["*/*"],
+        "Content-Length": ["2"]
+    },
+    "detail-type": "Scheduled Event",
+    "multiValueQueryStringParameters": null,
+    "path": "/test",
+    "pathParameters": null,
+    "queryStringParameters": null,
+    "requestContext": {
+        "accountId": "offlineContext_accountId",
+        "apiId": "offlineContext_apiId",
+        "authorizer": { "principalId": "offlineContext_authorizer_principalId" },
+        "domainName": "offlineContext_domainName",
+        "domainPrefix": "offlineContext_domainPrefix",
+        "extendedRequestId": "ck7gih5hn0000x51phqqeeweg",
+        "httpMethod": "POST",
+        "identity": {
+            "accessKey": null,
+            "accountId": "offlineContext_accountId",
+            "apiKey": "offlineContext_apiKey",
+            "caller": "offlineContext_caller",
+            "cognitoAuthenticationProvider": "offlineContext_cognitoAuthenticationProvider",
+            "cognitoAuthenticationType": "offlineContext_cognitoAuthenticationType",
+            "cognitoIdentityId": "offlineContext_cognitoIdentityId",
+            "cognitoIdentityPoolId": "offlineContext_cognitoIdentityPoolId",
+            "principalOrgId": null,
+            "sourceIp": "127.0.0.1",
+            "user": "offlineContext_user",
+            "userAgent": "insomnia/7.1.1",
+            "userArn": "offlineContext_userArn"
+        },
+        "path": "/dev/test",
+        "protocol": "HTTP/1.1",
+        "requestId": "ck7gih5hn0001x51pder28l0c",
+        "requestTime": "06/Mar/2020:18:27:30 -0000",
+        "requestTimeEpoch": 1583519250435,
+        "resourceId": "offlineContext_resourceId",
+        "resourcePath": "/test",
+        "stage": "dev"
+    },
+    "resource": "/test",
+    "stageVariables": null
+}
