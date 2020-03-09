@@ -55,13 +55,13 @@ provider:
           Resource: '*'
 
 functions:
-    test:
-        handler: src/api/test.lambda
+    hello:
+        handler: src/api/hello.lambda
         events:
             # - schedule: ${self:custom.warmRate}
             - http:
                   method: post
-                  path: /test
+                  path: /hello
                   cors: ${self:custom.corsConfig}
                   #   authorizer: ${self:custom.authorizer.${self:custom.stage}}
 # resources:
