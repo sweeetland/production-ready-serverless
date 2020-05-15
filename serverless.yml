@@ -1,19 +1,12 @@
 service: ${file(package.json):name}
 
 plugins:
-    - serverless-webpack
     - serverless-offline
-
-package:
-    individually: true
 
 custom:
     stage: ${opt:stage, 'dev'}
     region: ${opt:region, 'eu-west-1'}
     MAIN_TABLE: ${self:service}-Main-Table
-    webpack:
-        includeModules: true
-        packager: 'yarn'
     corsConfig:
         origins:
             - '*'
