@@ -13,6 +13,5 @@ package-lock.json
 .vs/config/applicationhost.config
 .serverless
 *.log
-yarn.lock
 .vscode
 .webpack

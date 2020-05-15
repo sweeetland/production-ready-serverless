@@ -1,15 +1,14 @@
-import { object } from 'yup'
+import { APIGatewayProxyHandler } from 'better-lambda-types'
 
-import { applyHooks } from '../hooks'
-import { APIGatewayHandler } from '../types/lambda'
+import { withHooks } from '../hooks'
 import { OK } from '../utils/response'
 
-const schema = object({})
+type Body = {}
 
-const handler: APIGatewayHandler<typeof schema> = async event => {
+const handler: APIGatewayProxyHandler<Body> = async event => {
     console.log('hello from the lambda: ', event)
 
     return OK({ message: 'world' })
 }
 
-export const lambda = applyHooks(handler, { requestSchema: schema })
+export const lambda = withHooks(handler)

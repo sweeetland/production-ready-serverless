@@ -1,10 +1,10 @@
 {
-    "name": "changeme",
+    "name": "production-ready-serverless",
     "version": "0.0.1",
     "description": "",
     "scripts": {
         "test": "",
-        "lint:fix": "eslint 'src/**'",
+        "lint": "./node_modules/.bin/eslint 'src/**'",
         "predeploy": "rm -rf ./build && tsc",
         "deploy": "sls deploy -v"
     },
@@ -16,23 +16,18 @@
         "@types/yup": "^0.26.32",
         "@typescript-eslint/eslint-plugin": "^2.21.0",
         "@typescript-eslint/parser": "^2.21.0",
+        "better-lambda-types": "^0.0.4",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.10.0",
         "eslint-plugin-prettier": "^3.1.2",
         "prettier": "^1.19.1",
         "serverless": "^1.65.0",
         "serverless-offline": "^6.0.0-alpha.67",
-        "serverless-webpack": "^5.3.1",
-        "ts-loader": "^6.2.1",
-        "typescript": "^3.8.3",
-        "webpack": "^4.42.0"
+        "typescript": "^3.8.3"
     },
     "dependencies": {
         "aws-lambda": "^1.0.5",
         "aws-sdk": "^2.630.0",
-        "axios": "^0.19.2",
-        "http-errors": "^1.7.3",
-        "lambda-hooks": "^0.0.10",
-        "yup": "^0.28.2"
+        "lambda-hooks": "^0.1.5"
     }
 }
