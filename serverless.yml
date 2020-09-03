@@ -19,7 +19,7 @@ provider:
   logRetentionInDays: 7
   versionFunctions: false
   deploymentBucket:
-    name: serverless-deployment-bucket-123 # <-- this will need to be globally unique
+    name: serverless-deployment-bucket-${self:service} # <-- this will need to be globally unique
   environment:
     STAGE: ${self:custom.STAGE}
 
