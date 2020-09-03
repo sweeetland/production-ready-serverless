@@ -1,78 +1,33 @@
 service: ${file(package.json):name}
 
 plugins:
-    - serverless-offline
+  - serverless-deployment-bucket
+  - serverless-dotenv-plugin
+  - serverless-plugin-typescript
 
 custom:
-    stage: ${opt:stage, 'dev'}
-    region: ${opt:region, 'eu-west-1'}
-    MAIN_TABLE: ${self:service}-Main-Table
-    corsConfig:
-        origins:
-            - '*'
-        headers:
-            - Authorization
-            - Content-Type
-            - X-Token
-            - X-Api-Key
-        allowCredentials: false
+  STAGE: ${opt:stage, 'development'}
+  REGION: ${opt:region, 'eu-west-1'}
 
 provider:
-    name: aws
-    runtime: nodejs12.x
-    region: ${self:custom.region}
-    stage: ${self:custom.stage}
-    memorySize: 128
-    timeout: 30
-    logRetentionInDays: 7
-    versionFunctions: false
-    deploymentBucket:
-        name: ${self:service}-serverless-deploys
-    environment:
-        NODE_ENV: ${self:custom.stage}
-    iamRoleStatements:
-        - Effect: Allow
-          Action:
-              - dynamodb:DescribeTable
-              - dynamodb:Query
-              - dynamodb:Scan
-              - dynamodb:GetItem
-              - dynamodb:PutItem
-              - dynamodb:UpdateItem
-              - dynamodb:DeleteItem
-              - dynamodb:BatchGetItem
-          Resource: 'arn:aws:dynamodb:eu-west-1:*:*'
-        - Effect: Allow
-          Action:
-              - s3:*
-          Resource: '*'
+  name: aws
+  runtime: nodejs12.x
+  region: ${self:custom.REGION}
+  stage: ${self:custom.STAGE}
+  memorySize: 128
+  timeout: 30
+  logRetentionInDays: 7
+  versionFunctions: false
+  deploymentBucket:
+    name: serverless-deploys-${self:service}-${self:custom.STAGE}
+  environment:
+    STAGE: ${self:custom.STAGE}
 
 functions:
-    hello:
-        handler: src/api/hello.lambda
-        events:
-            # - schedule: ${self:custom.warmRate}
-            - http:
-                  method: post
-                  path: /hello
-                  cors: ${self:custom.corsConfig}
-                  #   authorizer: ${self:custom.authorizer.${self:custom.stage}}
-# resources:
-#     Resources:
-#         MainTable:
-#             Type: AWS::DynamoDB::Table
-#             Properties:
-#                 TableName: ${self:custom.MAIN_TABLE}
-#                 AttributeDefinitions:
-#                     - AttributeName: PK
-#                       AttributeType: S
-#                     - AttributeName: SK
-#                       AttributeType: S
-#                 KeySchema:
-#                     - AttributeName: PK
-#                       KeyType: HASH
-#                     - AttributeName: SK
-#                       KeyType: RANGE
-#                 BillingMode: PAY_PER_REQUEST
-#                 StreamSpecification:
-#                     StreamViewType: NEW_AND_OLD_IMAGES
+  HelloWorld:
+    handler: src/functions/HelloWorld.handler
+    events:
+      - http:
+          method: get
+          path: /hello
+          cors: true

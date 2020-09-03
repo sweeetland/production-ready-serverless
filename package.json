@@ -1,33 +1,39 @@
 {
-    "name": "production-ready-serverless",
-    "version": "0.0.1",
-    "description": "",
-    "scripts": {
-        "test": "",
-        "lint": "./node_modules/.bin/eslint 'src/**'",
-        "predeploy": "rm -rf ./build && tsc",
-        "deploy": "sls deploy -v"
-    },
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@types/aws-lambda": "^8.10.45",
-        "@types/node": "^12.12.24",
-        "@types/yup": "^0.26.32",
-        "@typescript-eslint/eslint-plugin": "^2.21.0",
-        "@typescript-eslint/parser": "^2.21.0",
-        "better-lambda-types": "^0.0.4",
-        "eslint": "^6.8.0",
-        "eslint-config-prettier": "^6.10.0",
-        "eslint-plugin-prettier": "^3.1.2",
-        "prettier": "^1.19.1",
-        "serverless": "^1.65.0",
-        "serverless-offline": "^6.0.0-alpha.67",
-        "typescript": "^3.8.3"
-    },
-    "dependencies": {
-        "aws-lambda": "^1.0.5",
-        "aws-sdk": "^2.630.0",
-        "lambda-hooks": "^0.1.5"
+  "name": "service-boilerplate",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "",
+    "type-check": "./node_modules/.bin/tsc --noEmit && yarn lint",
+    "lint": "./node_modules/.bin/eslint 'src/**' --ext .ts,.tsx --max-warnings 0",
+    "predeploy": "yarn lint",
+    "deploy": "./node_modules/.bin/sls deploy -v"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn type-check"
     }
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.51",
+    "@types/node": "^12.12.24",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "better-lambda-types": "^0.0.4",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "serverless": "^1.71.0",
+    "serverless-deployment-bucket": "^1.1.2",
+    "serverless-dotenv-plugin": "^2.4.2",
+    "serverless-plugin-typescript": "^1.1.9",
+    "typescript": "^3.9.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.677.0",
+    "axios": "0.19.0",
+    "lambda-hooks": "^0.2.0"
+  }
 }
