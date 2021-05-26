@@ -1,109 +1,33 @@
 service: ${file(package.json):name}
 
-useDotenv: true
-
 plugins:
   - serverless-deployment-bucket
+  - serverless-dotenv-plugin
   - serverless-plugin-typescript
 
 custom:
-  STAGE: ${opt:stage, 'dev'}
-  REGION: ${opt:region, 'eu-central-1'}
-  MDP_SOURCES_BUCKET_NAME: ${cf:mewaLandingZoneResources-${self:provider.stage}.SourcesBucketName}
-  WORKDOCS_FOLDER_IDS_TABLE_NAME: ${self:service}-workdocs-folderIds-${self:custom.STAGE}
-  C3_TABLE_NAME: ${self:service}-C3-${self:custom.STAGE}
+  STAGE: ${opt:stage, 'development'}
+  REGION: ${opt:region, 'eu-west-1'}
 
 provider:
   name: aws
-  runtime: nodejs14.x
-  stage: ${self:custom.STAGE}
+  runtime: nodejs12.x
   region: ${self:custom.REGION}
-  profile: ${env:AWS_PROFILE, 'mewa-dataplatform-dev'}
+  stage: ${self:custom.STAGE}
   memorySize: 128
   timeout: 30
   logRetentionInDays: 7
   versionFunctions: false
   deploymentBucket:
-    name: ${self:service}-serverless-deploys
+    name: serverless-deployment-bucket-${self:service} # <-- this will need to be globally unique
   environment:
     STAGE: ${self:custom.STAGE}
-    WORKDOCS_FOLDER_IDS_TABLE_NAME: ${self:custom.WORKDOCS_FOLDER_IDS_TABLE_NAME}
-    C3_TABLE_NAME: ${self:custom.C3_TABLE_NAME}
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - s3:*Object
-            - workdocs:*
-            - dynamodb:GetItem
-            - dynamodb:PutItem
-          Resource: '*'
-
 
 functions:
-  OnS3DeliveryNoteCreated:
-    handler: src/functions/OnS3DeliveryNoteCreated.handler
-    environment:
-      MDP_SOURCES_BUCKET_NAME: ${self:custom.MDP_SOURCES_BUCKET_NAME}
+  HelloWorld:
+    handler: src/functions/HelloWorld.handler
     events:
-      - s3:
-          bucket: ${self:custom.MDP_SOURCES_BUCKET_NAME}
-          event: s3:ObjectCreated:*
-          existing: true
-          rules:
-            - prefix: delivery_notes/
-
-resources:
-  Resources:
-    WorkdocsFolderIdsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:custom.WORKDOCS_FOLDER_IDS_TABLE_NAME}
-        BillingMode: PAY_PER_REQUEST
-        KeySchema:
-          - AttributeName: country
-            KeyType: 'HASH'
-          - AttributeName: customerId
-            KeyType: 'RANGE'
-        AttributeDefinitions:
-          - AttributeName: country
-            AttributeType: 'S'
-          - AttributeName: customerId
-            AttributeType: 'S'
-
-    C3Table:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:custom.C3_TABLE_NAME}
-        BillingMode: PAY_PER_REQUEST
-        KeySchema:
-          - AttributeName: pdfId
-            KeyType: 'HASH'
-        AttributeDefinitions:
-          - AttributeName: pdfId
-            AttributeType: 'S'
-          - AttributeName: country
-            AttributeType: 'S'
-          - AttributeName: customerId
-            AttributeType: 'S'
-          - AttributeName: date
-            AttributeType: 'S'
-        GlobalSecondaryIndexes:
-          - IndexName: byCountry
-            KeySchema:
-              - AttributeName: country
-                KeyType: HASH
-              - AttributeName: date
-                KeyType: RANGE
-            Projection:
-                ProjectionType: ALL
-          - IndexName: byCustomer
-            KeySchema:
-              - AttributeName: customerId
-                KeyType: HASH
-              - AttributeName: date
-                KeyType: RANGE
-            Projection:
-                ProjectionType: ALL
-                
+      - http:
+          method: get
+          path: /hello
+          cors: true
