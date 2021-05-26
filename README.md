@@ -1,12 +1,25 @@
-# PRODUCTION-READY-SERVERLESS
+# META-ZTM2
 
-This is a boilerplate serverless service to speed up the creation of new serverless services. Complete with CI via GH Actions, TypeScript, ESlint & [lambda-hooks](https://github.com/sweeetland/lambda-hooks).
+This service is responsible uploading new documents from s3 to workdocs.
 
-## How to use
+## Development
 
-1. Click on use this template in the github console and choose a unique repo name
-2. Use the name above and edit the existing name in package.json
-3. Add AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as github secrets.
-4. On a push/merge to production, staging or development a GH action will run serverless deploy
+- `yarn` to install dependancies
 
-Happy Hacking!!
+## Deployment
+
+- `yarn deploy` to deploy service. optional parameter is `--stage prod` if stage is not provided it will default to `dev`.
+
+There is a manual process for each new stage created. For each new stage we need to manually create a root folder in workdocs and then save this root folderId in the `WorkdocsFolderIdsTable`.
+
+it will look something like this:
+
+```json
+{
+  "country": "ROOT",
+  "customerId": "ROOT",
+  "folderId": "8d1ef4f9419a473562408857605bff75c15bf44fd49022f49c0d1e1fd8b2f6d1"
+}
+```
+
+where `folderId` is the folder id of the root folder that is manually created. Once the very most root folder is added to dynamo the service is ready to use.

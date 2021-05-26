@@ -1,5 +1,5 @@
 {
-  "name": "service-boilerplate",
+  "name": "mewa-ztm2",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "type-check": "./node_modules/.bin/tsc --noEmit && yarn lint",
     "lint": "./node_modules/.bin/eslint 'src/**' --ext .ts,.tsx --max-warnings 0",
     "predeploy": "yarn lint",
-    "deploy": "sls deploy -v"
+    "deploy": "./node_modules/.bin/sls deploy -v"
   },
   "husky": {
     "hooks": {
@@ -15,24 +15,24 @@
     }
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.51",
-    "@types/node": "^12.12.24",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
-    "better-lambda-types": "^0.0.4",
-    "eslint": "^7.0.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
+    "@types/aws-lambda": "^8.10.76",
+    "@types/node": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
     "husky": "^4.2.5",
-    "prettier": "^2.0.5",
-    "serverless-deployment-bucket": "^1.1.2",
-    "serverless-dotenv-plugin": "^2.4.2",
+    "prettier": "^2.2.1",
+    "serverless": "^2.39.0",
+    "serverless-deployment-bucket": "^1.4.3",
+    "serverless-dotenv-plugin": "^3.9.0",
     "serverless-plugin-typescript": "^1.1.9",
-    "typescript": "^3.9.2"
+    "typescript": "^4.2.4"
   },
   "dependencies": {
-    "aws-sdk": "^2.677.0",
-    "axios": "0.19.0",
-    "lambda-hooks": "^0.2.0"
+    "aws-sdk": "^2.897.0",
+    "axios": "^0.21.1",
+    "axios-logger": "^2.5.0"
   }
 }

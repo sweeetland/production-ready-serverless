@@ -1,12 +1,26 @@
-import axios from 'axios';
+import Axios from 'axios';
+import * as AxiosLogger from 'axios-logger';
 
-export const get = <T>(url: string): Promise<T> => axios.get<T>(url).then((r) => r.data);
+const axios = Axios.create();
 
-export const post = <T>(
-  url: string,
-  body?: unknown,
-  headers?: { [k: string]: string }
-): Promise<T> =>
+AxiosLogger.setGlobalConfig({ prefixText: false });
+
+axios.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger);
+axios.interceptors.response.use(AxiosLogger.responseLogger, AxiosLogger.errorLogger);
+
+type Headers = Record<string, string>;
+
+export const get = <T>(url: string, headers?: Headers): Promise<T> =>
+  axios
+    .get<T>(url, { headers })
+    .then((r) => r.data);
+
+export const post = <T>(url: string, body?: unknown, headers?: Headers): Promise<T> =>
   axios
     .post<T>(url, body, { headers })
+    .then((r) => r.data);
+
+export const put = <T>(url: string, body?: unknown, headers?: Headers): Promise<T> =>
+  axios
+    .put<T>(url, body, { headers })
     .then((r) => r.data);

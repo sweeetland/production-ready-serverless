@@ -1,0 +1,38 @@
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "awsRegion": "eu-central-1",
+      "eventTime": "2021-05-04T06:30:51.385Z",
+      "eventName": "ObjectCreated:Put",
+      "userIdentity": {
+        "principalId": "AWS:AROARQRCUCB3NRUXMDMCP:james@completecoding.io"
+      },
+      "requestParameters": {
+        "sourceIPAddress": "185.169.233.213"
+      },
+      "responseElements": {
+        "x-amz-request-id": "TXQPC64B75A88ZGT",
+        "x-amz-id-2": "3KGQc7mPwkvXni+r+DsPa7/e7D4hBZoDc59w4NkfDpjMPlZ3+vNxVhHrV7Zz3wZ7v7CwMVyv/mwDWnukyNfDnUOkkApjxE2Y"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "mewa-ztm2-dev-OnS3DeliveryNoteCreated-625370049d90bb1b3c6f4bb7bb62501f",
+        "bucket": {
+          "name": "mdp-sources-dev",
+          "ownerIdentity": {
+            "principalId": "A1WKPNX498SM0U"
+          },
+          "arn": "arn:aws:s3:::mdp-sources-dev"
+        },
+        "object": {
+          "key": "delivery_notes/8cada015-7033-4f20-888e-45cb378ca97e.pdf",
+          "size": 48422,
+          "eTag": "8fd8b76f03ef7f59fe39fc449b62eec2",
+          "sequencer": "006090EA268EDBD505"
+        }
+      }
+    }
+  ]
+}
